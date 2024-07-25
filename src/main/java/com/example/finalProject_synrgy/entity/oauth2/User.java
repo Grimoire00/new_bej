@@ -1,5 +1,6 @@
 package com.example.finalProject_synrgy.entity.oauth2;
 
+import com.example.finalProject_synrgy.entity.Rekening;
 import com.example.finalProject_synrgy.entity.base.BaseDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -62,6 +63,15 @@ public class User extends BaseDate implements UserDetails {
     @Column(name = "credential_not_expired")
     private boolean credentialsNonExpired = true;
 
+    @JsonIgnore
+    private String pin;
+
+    @JsonIgnore
+    private String phoneNumber;
+
+    @JsonIgnore
+    private String bankAccountNumber;
+
     @ManyToMany(targetEntity = Role.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "oauth_user_role",
@@ -98,10 +108,4 @@ public class User extends BaseDate implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
-
-    private String pin;
-
-    private String phoneNumber;
-
-    private String bankAccountNumber;
-}
+    }
